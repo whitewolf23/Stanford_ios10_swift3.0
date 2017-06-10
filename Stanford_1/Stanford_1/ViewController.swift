@@ -14,7 +14,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var display: UILabel!
     
-    
+    //사용자가 입력중에 잇는 상태값 
+    //어딘 가의 저장
     var userIsInTheMiddleOfTyping = false
     
     @IBAction func touchDigit(_ sender : UIButton){
@@ -34,11 +35,17 @@ class ViewController: UIViewController {
         
     }
     
+    //자동으로 디스플레이 안에 뭐가 있는 지 추적 
+    //연산 프로퍼티
     var displayValue : Double{
+        //가져오기
+        //diplayValue값을 가져오기 위한 코드 
         get{
             return Double(display.text!)!
         }
         
+        //설정하기 
+        //누군가 변수를 설정할때 실행되는 코드
         set{
             display.text = String(newValue)
         }
