@@ -52,25 +52,27 @@ class ViewController: UIViewController {
     }
     
     
+    private var brain = CalculatorBrain()
+    
     
     @IBAction func performOperation(_ sender: UIButton){
-        userIsInTheMiddleOfTyping = false
-        if let mathematicalSymbol = sender.currentTitle{
-            switch mathematicalSymbol{
-                case "∏":
-//                display!.text = String(Double.pi)
-                displayValue = Double.pi
-
-                case "√":
-//                    let operand = Double(display!.text!)!
-//                    display!.text = String(sqrt(operand))
-                displayValue = sqrt(displayValue)
- 
-            default:
-                break
-                
-            }
+        //사용자가 미입력시 해당
+        if userIsInTheMiddleOfTyping {
+            brain.setOperand(displayValue)
+            userIsInTheMiddleOfTyping = false
         }
+       
+        
+        //수학기호를 인식한다면
+        //calculatorbrain 에서 모델 작업
+        if let mathematicalSymbol = sender.currentTitle{
+         brain.performOperation(mathematicalSymbol)
+        }
+        
+        if let result = brain.result{
+            displayValue = result
+        }
+        
     }
     
     override func viewDidLoad() {
